@@ -230,12 +230,14 @@ ionic.views.Slider = ionic.views.View.inherit({
 
     function begin() {
 
+      delay = options.auto || 0;
       interval = setTimeout(next, delay);
 
     }
 
     function stop() {
 
+      delay = 0;
       clearTimeout(interval);
 
     }
@@ -526,11 +528,10 @@ ionic.views.Slider = ionic.views.View.inherit({
 
     this.autoPlay = function(newDelay) {
       if (!newDelay || newDelay < 0) {
-        options.auto = 0;
-        this.stop();
+        stop();
       } else {
         options.auto = newDelay;
-        this.start();
+        begin();
       }
     };
 
