@@ -204,7 +204,7 @@ ionic.views.Slider = ionic.views.View.inherit({
 
           element.style.left = to + 'px';
 
-          if (delay && !paused) begin();
+          if (delay) begin();
 
           options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
 
@@ -221,19 +221,16 @@ ionic.views.Slider = ionic.views.View.inherit({
 
     // setup auto slideshow
     var delay = options.auto || 0;
-    var paused = false;
     var interval;
 
     function begin() {
 
-      delay = options.auto || 0;
       interval = setTimeout(next, delay);
 
     }
 
     function stop() {
 
-      delay = options.auto || 0;
       clearTimeout(interval);
 
     }
@@ -458,7 +455,7 @@ ionic.views.Slider = ionic.views.View.inherit({
 
         if (parseInt(event.target.getAttribute('data-index'), 10) == index) {
 
-          if (delay && !paused) begin();
+          if (delay) begin();
 
           options.transitionEnd && options.transitionEnd.call(event, index, slides[index]);
 
@@ -486,7 +483,7 @@ ionic.views.Slider = ionic.views.View.inherit({
         this.slideIsDisabled = !shouldEnable;
       }
       return !this.slideIsDisabled;
-    },
+    };
     this.slide = this.select = function(to, speed) {
       // cancel slideshow
       stop();
@@ -510,12 +507,12 @@ ionic.views.Slider = ionic.views.View.inherit({
 
     this.stop = function() {
       // cancel slideshow
-      paused = true;
+      delay = 0;
       stop();
     };
 
     this.start = function() {
-      paused = false;
+      delay = options.auto;
       begin();
     };
 
@@ -584,7 +581,7 @@ ionic.views.Slider = ionic.views.View.inherit({
       setup();
 
       // start auto slideshow if applicable
-      if (delay && !paused) begin();
+      if (delay) begin();
 
 
       // add event listeners
