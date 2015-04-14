@@ -1170,9 +1170,7 @@
         this.preventedFirstMove = false;
 
       } else if (!this.preventedFirstMove && ev.srcEvent.type == 'touchmove') {
-        if (inst.options.prevent_default_directions.indexOf(ev.direction) != -1) {
-          ev.srcEvent.preventDefault();
-        }
+        ev.srcEvent.preventDefault();
         this.preventedFirstMove = true;
       }
 
